@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Test</title>
+</head>
+
+<body>
+    
+    <div class="box-center">
+        
+
+        <h2>What do you want to do for sport activity today?</h2>
+        <div class="sports-radio">
+        <div>
+            <label>
+            <input type="radio" name="sport" value="0"  id="selectedSportIndex" onchange="selectSport()">
+            Football
+            </label>
+        </div>
+        <div>
+            <label>
+            <input type="radio" name="sport" value="1" id="selectedSportIndex" onchange="selectSport()">
+            Volleyball
+            </label>
+        </div>
+        <div>
+            <label>
+            <input type="radio" name="sport" value="2" id="selectedSportIndex" onchange="selectSport()">
+            Badminton
+            </label>
+        </div>
+        </div>
+        <div id ="myContainer">
+        <div id ="myAnimation"><div style="margin:center !important;">ME</div></div>
+
+        <div class="football-box">
+            Football
+        </div>
+        <div class="volleyball-box">
+            Volleyball
+        </div>
+        <div class="badminton-box">
+            Badminton
+        </div>
+        </div>
+
+        <div>
+            Select Sport: <label id="selectedSportLabel"></label>
+          </div>
+          <div>
+            Equipments
+            <ul id="equipmentList"></ul>
+          </div>
+
+    </div>
+
+     <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script> 
+    <script>
+        const sports = [
+            {
+                name: 'Football',
+                bg_color: '#6bb46e',
+                equipments: ['Ball', 'Football Shoes', 'Goalpost']
+            },
+            {
+                name: 'Volleyball',
+                bg_color: '#c30f42',
+                equipments: ['Ball', 'Nets']
+            },
+            {
+                name: 'Badminton',
+                bg_color: '#2a82be',
+                equipments: ['Shuttlecock', 'Nets', 'Racket']
+            }
+        ];
+
+        function selectSport(event) {
+            var selectedValue = $('input[name="sport"]:checked').val();
+            console.log(selectedValue);
+
+            var elem = $("#myAnimation");
+            var elem2 = $("#myContainer");
+            var offsetTop = elem.offset().top;
+            var offsetLeft = elem.offset().left;
+            var maxWidth = elem2.outerWidth();
+            var halfWidth = maxWidth / 2;
+            var maxHeight = elem2.outerHeight();
+            clearInterval(id);
+
+            if (selectedValue == 0) {
+               
+                $("#myAnimation").animate({
+                    top: '50px',
+                    left: '50px'
+                });
+            } else if (selectedValue == 1) {
+                $("#myAnimation").animate({
+                    top: '50px',
+                    left: '463px'
+                });
+            } else if (selectedValue == 2) {
+                $("#myAnimation").animate({
+                    top: '251px',
+                    left: '262px'
+                });
+            }
+            
+            $("#selectedSportLabel").html(sports[selectedValue].name);
+
+            var equipmentListHtml = "";
+            $.each(sports[selectedValue].equipments, function(index, equipment) {
+            equipmentListHtml += "<li>" + equipment + "</li>";
+            });
+            $("#equipmentList").html(equipmentListHtml);
+            
+            $("#myContainer").css("background-color", sports[selectedValue].bg_color);
+            // $("#myContainer").css("background-color", sports[selectedValue].bg_color);
+            }
+        var id = null;
+
+
+
+    </script>
+    <style>
+        .box-center{
+            margin: auto;
+            width: 50%;
+            border: none;
+            padding: 10px;
+            padding-top: 20px;
+        }
+        .football-box{
+            top: 50px;
+            left: 50px;
+            position:absolute;
+            margin: auto;
+            width: 70px;
+            height: 50px;
+            border: 2px solid green;
+            text-align: center; /* Center-align the text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .volleyball-box{
+            top: 50px;
+            right: 63px;
+            position:absolute;
+            margin: auto;
+            width: 70px;
+            height: 50px;
+            border: 2px solid green;
+            text-align: center; /* Center-align the text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .badminton-box{
+            bottom: 83px;
+            left: 261px;
+            position:absolute;
+            margin: auto;
+            width: 70px;
+            height: 50px;
+            border: 2px solid green;
+            text-align: center; /* Center-align the text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #myContainer {
+          position:relative;
+          width: 600px;
+          height: 388px;
+          position: relative;
+          background-color: white;
+          transition: background-color 1s ease;
+          border: 1px solid gray;
+        }
+
+        .sports-radio{
+        display: flex;
+        flex-wrap: wrap;
+        }
+        #myAnimation {
+          padding: auto;
+          z-index: 10;
+          width: 70px;
+          height: 50px;
+          position: absolute;
+          background-color: rgb(86, 84, 84);
+          top: 39%;
+          left: 42%;
+          border: 2px solid black;
+          text-align: center; /* Center-align the text */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        </style>
+</body>
+
+</html>
